@@ -55,6 +55,8 @@ public class MiniGUI {
                 result.setText(Integer.toString(rng.nextInt()));
             }
         });
+        
+        
 
     }
 
