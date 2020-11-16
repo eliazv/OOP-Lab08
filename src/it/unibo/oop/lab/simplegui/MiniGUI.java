@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -34,8 +36,13 @@ public class MiniGUI {
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        final JPanel pannello = new JPanel();
+        pannello.setLayout(new BoxLayout(pannello, BoxLayout.X_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        JTextField result = new JTextField();
+        canvas.add(result, BorderLayout.NORTH);
+        pannello.add(write, BorderLayout.CENTER);
+        canvas.add(pannello);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -45,8 +52,10 @@ public class MiniGUI {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 System.out.println(rng.nextInt());
+                result.setText(Integer.toString(rng.nextInt()));
             }
         });
+
     }
 
     private void display() {
@@ -62,6 +71,7 @@ public class MiniGUI {
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
+        frame.pack();
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
@@ -78,7 +88,7 @@ public class MiniGUI {
      * @param args ignored
      */
     public static void main(final String... args) {
-       new MiniGUI().display();
+       new MiniGUI().display();      
     }
 
 }
